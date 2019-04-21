@@ -1,6 +1,8 @@
 package main
 
-import "mini-micro/spider/rpc"
+import "spider/rpc"
+
+// import "spider/rpc"
 
 func main() {
 	rpc.Serve()

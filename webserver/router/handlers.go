@@ -3,7 +3,7 @@ package router
 import (
 	"encoding/json"
 	"io/ioutil"
-	"mini-micro/webserver/rpc"
+	"webserver/rpc"
 
 	"github.com/valyala/fasthttp"
 )

@@ -1,0 +1,7 @@
+version: "3"
+services:
+  spider:
+    container_name: spider
+    image: mini-micro/spider
+    volumes:
+      - "./nohup.out /data/spider/nohup.out"

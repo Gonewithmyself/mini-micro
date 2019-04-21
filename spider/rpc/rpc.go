@@ -1,7 +1,7 @@
 package rpc
 
 import (
-	"mini-micro/spider/spider"
+	"spider/spider"
 	"net"
 	"net/http"
 	"net/rpc"
