@@ -3,5 +3,7 @@ services:
   spider:
     container_name: spider
     image: mini-micro/spider
+    restart: unless-stopped
+    network_mode: bridge
     volumes:
-      - "./nohup.out /data/spider/nohup.out"
+      - "./data /data/spider"

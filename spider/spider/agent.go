@@ -19,6 +19,9 @@ func Post(word string) (body string) {
 		fmt.Println("error", err)
 		return
 	}
+
+	// clear for next call
+	agent.Data = make(map[string]interface{})
 	_ = resp
 	return body
 }

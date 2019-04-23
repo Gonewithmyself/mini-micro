@@ -3,4 +3,7 @@ services:
   webserver:
     container_name: webserver
     image: mini-micro/webserver
-    
+    restart: unless-stopped
+    network_mode: bridge
+    volumes: 
+    - "./data:/data/webserver"
