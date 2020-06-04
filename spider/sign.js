@@ -20,6 +20,7 @@ var token = function(r, _gtk) {
     S %= 1e6,
     S.toString() + "." + (S ^ h)
 }
+
 function a(r, o) {
     for (var t = 0; t < o.length - 2; t += 3) {
         var a = o.charAt(t + 2);

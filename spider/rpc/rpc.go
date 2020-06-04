@@ -1,10 +1,10 @@
 package rpc
 
 import (
-	"spider/spider"
 	"net"
 	"net/http"
 	"net/rpc"
+	"spider/spider"
 )
 
 func (s *SpiderService) Crawl(in *Request, out *Response) error {
@@ -12,7 +12,7 @@ func (s *SpiderService) Crawl(in *Request, out *Response) error {
 	return nil
 }
 
-func Serve() {
+func Serve() *http.Server {
 	svc := &SpiderService{}
 	rpc.Register(svc)
 	rpc.HandleHTTP()
@@ -22,5 +22,9 @@ func Serve() {
 		panic(err)
 	}
 
-	http.Serve(l, nil)
+	sv := &http.Server{
+		Handler: rpc.DefaultServer,
+	}
+	go sv.Serve(l)
+	return sv
 }
