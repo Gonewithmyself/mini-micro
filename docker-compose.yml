@@ -2,16 +2,16 @@ version: "3"
 services: 
   webserver:
     container_name: webserver
-    image: web:test # unistd1999/web
+    image:  unistd1999/web:test # unistd1999/web
     restart: unless-stopped
     ports: 
       - 8080:8080
     depends_on: 
       - spider
+    volumes: 
+      - "./webserver/config:/data/webserver/config"
 
   spider:
     container_name: spider
-    image: spider:test # unistd1999/spider
+    image: unistd1999/spider:test # unistd1999/spider
     restart: unless-stopped
-    volumes:
-      - "./data /data/spider"

@@ -16,7 +16,7 @@ func main() {
 	sv := rpc.Serve()
 	log.Println("start server")
 	ch := make(chan os.Signal, 1)
-	signal.Notify(ch, os.Kill, os.Interrupt, syscall.SIGQUIT, syscall.SIGTERM)
+	signal.Notify(ch, os.Interrupt, syscall.SIGTERM, syscall.SIGQUIT)
 	<-ch
 
 	ctx, _ := context.WithTimeout(context.Background(), time.Second*5)
