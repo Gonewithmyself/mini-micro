@@ -1,8 +1,8 @@
 package rpc
 
 import (
-	"fmt"
 	"io/ioutil"
+	"log"
 	"net/rpc"
 	"strings"
 )
@@ -15,15 +15,16 @@ var client *rpc.Client
 
 func init() {
 	readConf()
-	var err error
+}
 
+func dial() error {
 	rpcHost := confMap["rpchost"]
-	fmt.Println(rpcHost)
+	var err error
 	client, err = rpc.DialHTTP("tcp", rpcHost)
-	if nil != err {
-		panic(err)
+	if err != nil {
+		log.Println("dial", rpcHost, err)
 	}
-
+	return err
 }
 
 func Trans(word string) string {
@@ -32,9 +33,17 @@ func Trans(word string) string {
 		out = &Response{}
 	)
 
+	if client == nil {
+		if err := dial(); err != nil {
+			return "no available backend"
+		}
+	}
+
 	err := client.Call("SpiderService.Crawl", in, out)
 	if nil != err {
-		fmt.Println(err)
+		log.Println(err)
+		out.Means = "error: " + err.Error()
+		client = nil
 	}
 
 	return out.Means
