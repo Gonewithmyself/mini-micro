@@ -19,4 +19,4 @@ spec:
     spec:
       containers:
       - name: spider
-        image: unistd1999/spider
+        image: unistd1999/spider:test
