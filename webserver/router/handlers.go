@@ -3,6 +3,7 @@ package router
 import (
 	"encoding/json"
 	"io/ioutil"
+	"log"
 	"webserver/rpc"
 
 	"github.com/valyala/fasthttp"
@@ -27,6 +28,7 @@ func Post(ctx *fasthttp.RequestCtx) {
 		Data: rpc.Trans(string(word)),
 	}
 
+	log.Println("serve", string(word))
 	data, _ := json.Marshal(res)
 	ctx.Write(data)
 }
