@@ -1,10 +1,12 @@
 package main
 
 import (
+	"context"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 	"webserver/router"
 
 	"github.com/valyala/fasthttp"
@@ -12,9 +14,10 @@ import (
 
 func main() {
 	sv := &fasthttp.Server{
-		Handler: router.R.Handler,
+		Handler:     router.R.Handler,
+		ReadTimeout: time.Second * 60,
 	}
-	go sv.ListenAndServe(":8080")
+	go sv.ListenAndServe(":8081")
 	log.Println("start server")
 
 	sigProc(sv)
@@ -29,9 +32,16 @@ func sigProc(sv *fasthttp.Server) {
 		log.Println("recv signal:", sig)
 		switch sig {
 		case os.Interrupt, syscall.SIGTERM, syscall.SIGQUIT:
-			if err := sv.Shutdown(); nil != err {
-				log.Println("shutdown error", err)
-			}
+			ctx, cn := context.WithDeadline(context.Background(), time.Now().Add(time.Second*5))
+			go func() {
+				if err := sv.Shutdown(); nil != err {
+					log.Println("shutdown error", err)
+				}
+				log.Println("shutdown ok")
+				cn()
+			}()
+
+			<-ctx.Done()
 			return
 		}
 	}
