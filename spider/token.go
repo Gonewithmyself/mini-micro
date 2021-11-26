@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	Agent  = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Mobile Safari/537.36"
+	Agent  = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36"
 	cookie = `BAIDUID=26573F942C2978C7C6FAA992BD1C75C8:FG=1;locale=zh;path=/;domain=.baidu.com`
 	SignJs = "../spider/sign.js"
 )

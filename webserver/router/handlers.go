@@ -3,7 +3,7 @@ package router
 import (
 	"encoding/json"
 	"io/ioutil"
-	"mini-micro/spider"
+	"mini-micro/transapi"
 
 	"github.com/valyala/fasthttp"
 )
@@ -24,7 +24,7 @@ func Post(ctx *fasthttp.RequestCtx) {
 	word := ctx.PostArgs().Peek("ctx")
 
 	res := &response{
-		Data: spider.Trans(string(word)),
+		Data: transapi.Trans(string(word)),
 	}
 
 	data, _ := json.Marshal(res)
